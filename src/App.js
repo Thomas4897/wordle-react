@@ -1,100 +1,116 @@
 import React, { Component } from "react";
-import { InputRow } from "./component";
+import { WordComponent } from "./component";
 import "./App.css";
 
 export class App extends Component {
   state = {
-    word: "on",
+    word: "start",
     guessInput: "",
     wordsArray: [
       [
         {
           letter: "",
+          matches: false,
+          includes: false,
         },
         {
           letter: "",
+          matches: false,
+          includes: false,
         },
         {
           letter: "",
+          matches: false,
+          includes: false,
         },
         {
           letter: "",
+          matches: false,
+          includes: false,
         },
         {
           letter: "",
+          matches: false,
+          includes: false,
         },
       ],
-      [
-        {
-          letter: "",
-        },
-        {
-          letter: "",
-        },
-        {
-          letter: "",
-        },
-        {
-          letter: "",
-        },
-        {
-          letter: "",
-        },
-      ],
+      // [
+      //   {
+      //     letter: "",
+      //   },
+      //   {
+      //     letter: "",
+      //   },
+      //   {
+      //     letter: "",
+      //   },
+      //   {
+      //     letter: "",
+      //   },
+      //   {
+      //     letter: "",
+      //   },
+      // ],
     ],
   };
 
-  handleLetterInputChange = (event) => {
-    let input = [...this.state.guessInput];
-    console.log(this.state.guessInput);
-    // input.push(event.target.value);
+  handleLetterInputChange = (event, wordIndex, letterIndex) => {
+    const copiedWordsArray = [...this.state.wordsArray];
 
-    // if (input === this.state.word.length) {
+    copiedWordsArray[wordIndex][letterIndex] = {
+      ...copiedWordsArray[wordIndex][letterIndex],
+      letter: event.target.value,
+    };
+
     this.setState(
       {
-        guessInput: input + event.target.value,
+        wordsArray: copiedWordsArray,
       },
       () => {
-        console.log(this.state);
+        // console.log(this.state.wordsArray);
       }
     );
-    // }
   };
 
-  handleOnSubmit = (event) => {
-    const { word, guessInput } = this.state;
+  handleOnSubmit = () => {
+    // let copiedWord = this.state.word.split("").map((e) => {
+    //   return { letter: e, matched: false };
+    // });
 
-    if (guessInput.toUpperCase() === word.toUpperCase()) {
-      console.log("Correct!");
-    } else {
-      console.log("Guess Again!");
-    }
+    const copiedWordsArray = [...this.state.wordsArray];
+
+    //! This syntax
+    console.log("copiedWordsArray:", copiedWordsArray[0][0].letter);
+
+    // const newWordsArray = copiedWordsArray.map((e, { letter }) => {
+    // const { letter } = e;
+    // if (this.state.word.includes(e)) {
+    //   return true;
+    // }
+    //   console.log("e:");
+    //   return e[letter];
+    // });
+    // console.log("newWordsArray:", newWordsArray);
+    // for (let i = 0; i < copiedWord.length; i++) {}
   };
 
   render() {
-    const { guessInput } = this.state;
+    // const { guessInput } = this.state;
 
     return (
       <div className="App">
         <h1>Wordle</h1>
         <div>
-          {this.state.wordsArray.map((lettersArray) => {
-            return lettersArray.map(({ letter }, idx) => {
-              return (
-                <div>
-                  <InputRow key={`Input-letter-${idx}`} letter={letter} />
-                </div>
-              );
-            });
+          {this.state.wordsArray.map((lettersArray, wordIndex) => {
+            return (
+              <WordComponent
+                key={`Word-Index-${wordIndex}`}
+                wordIndex={wordIndex}
+                lettersArray={lettersArray}
+                handleLetterInputChange={this.handleLetterInputChange}
+              />
+            );
           })}
-
-          {/* <input
-            className="App-input"
-            maxLength={1}
-            name="guessInput"
-            // value={guessInput[0]}
-            onChange={this.handleOnInputChange}
-          /> */}
         </div>
         <button
           type="button"
