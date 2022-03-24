@@ -1,5 +1,9 @@
+body {
+  background-color: #e7e8ed;
+}
 .App {
   text-align: center;
+  background-color: #e7e8ed;
 }
 
 .App-logo {
@@ -41,4 +45,15 @@
   max-width: 50px;
   text-align: center;
   font-size: 60px;
+}
+
+.InputLetters {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bolder;
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  border-radius: 6px;
+  background-color: #e7e8ed;
 }

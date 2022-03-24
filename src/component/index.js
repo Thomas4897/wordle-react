@@ -1,4 +1,4 @@
-import { InputRow } from "./InputRow";
+import { InputLetters } from "./InputLetters";
 import { WordComponent } from "./WordComponent";
 
-export { InputRow, WordComponent };
+export { InputLetters, WordComponent };

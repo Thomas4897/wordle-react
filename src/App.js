@@ -1,117 +1,768 @@
 import React, { Component } from "react";
 import { WordComponent } from "./component";
 import "./App.css";
+import isAlpha from "validator/lib/isAlpha";
+// const validator = require("validator");
+
+// const serverURL =
+//   "https://git.charlesreid1.com/cs/five-letter-words/raw/branch/master";
+
+const wordListArray = ["start", "catch", "build", "sight", "guide"];
+// let blankWordsArray = [
+//   [
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//   ],
+//   [
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//   ],
+//   [
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//   ],
+//   [
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//   ],
+//   [
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//   ],
+//   [
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//     {
+//       letter: "",
+//       matched: false,
+//       included: false,
+//       noMatch: false,
+//     },
+//   ],
+// ];
+
+function generateNewWordsArray(
+  wordsArray,
+  wordRow,
+  wordRowLetter,
+  updatedLetter
+) {
+  const copiedWordsArray = [...wordsArray];
+  copiedWordsArray[wordRow][wordRowLetter] = {
+    ...copiedWordsArray[wordRow][wordRowLetter],
+    letter: updatedLetter,
+  };
+  return copiedWordsArray;
+}
 
 export class App extends Component {
   state = {
     word: "start",
-    guessInput: "",
+    wordRow: 0,
+    wordRowLetter: 0,
     wordsArray: [
       [
         {
           letter: "",
-          matches: false,
-          includes: false,
+          matched: false,
+          included: false,
+          noMatch: false,
         },
         {
           letter: "",
-          matches: false,
-          includes: false,
+          matched: false,
+          included: false,
+          noMatch: false,
         },
         {
           letter: "",
-          matches: false,
-          includes: false,
+          matched: false,
+          included: false,
+          noMatch: false,
         },
         {
           letter: "",
-          matches: false,
-          includes: false,
+          matched: false,
+          included: false,
+          noMatch: false,
         },
         {
           letter: "",
-          matches: false,
-          includes: false,
+          matched: false,
+          included: false,
+          noMatch: false,
         },
       ],
-      // [
-      //   {
-      //     letter: "",
-      //   },
-      //   {
-      //     letter: "",
-      //   },
-      //   {
-      //     letter: "",
-      //   },
-      //   {
-      //     letter: "",
-      //   },
-      //   {
-      //     letter: "",
-      //   },
-      // ],
+      [
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+      ],
+      [
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+      ],
+      [
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+      ],
+      [
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+      ],
+      [
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+        {
+          letter: "",
+          matched: false,
+          included: false,
+          noMatch: false,
+        },
+      ],
     ],
   };
 
-  handleLetterInputChange = (event, wordIndex, letterIndex) => {
-    const copiedWordsArray = [...this.state.wordsArray];
-
-    copiedWordsArray[wordIndex][letterIndex] = {
-      ...copiedWordsArray[wordIndex][letterIndex],
-      letter: event.target.value,
-    };
+  handleOnNextSubmit = () => {
+    const randomNumber = Math.floor(Math.random() * wordListArray.length);
+    const newWord = wordListArray[randomNumber];
 
     this.setState(
       {
-        wordsArray: copiedWordsArray,
+        word: newWord,
+        wordRow: 0,
+        wordRowLetter: 0,
+        wordsArray: [
+          [
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+          ],
+          [
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+          ],
+          [
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+          ],
+          [
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+          ],
+          [
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+          ],
+          [
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+            {
+              letter: "",
+              matched: false,
+              included: false,
+              noMatch: false,
+            },
+          ],
+        ],
       },
       () => {
-        // console.log(this.state.wordsArray);
+        console.log(this.state);
       }
     );
   };
 
-  handleOnSubmit = () => {
-    // let copiedWord = this.state.word.split("").map((e) => {
-    //   return { letter: e, matched: false };
-    // });
-
+  handleKeyPress = (event) => {
+    let { word, wordRow, wordRowLetter } = this.state;
     const copiedWordsArray = [...this.state.wordsArray];
 
-    //! This syntax
-    console.log("copiedWordsArray:", copiedWordsArray[0][0].letter);
+    //! If "Eneter" key press run handleOnSubmit;
+    if (event.key === "Enter") {
+      this.handleOnSubmit();
+    }
+    //! if "Backspace" key pressed remove last inputted letter
+    else if (event.key === "Backspace") {
+      //! If current position in the wordArray matrix is (0,0)
+      //! remove any value in that position and do not change position
+      if (wordRowLetter === 0 && wordRow === 0) {
+        const updatedWordsArray = generateNewWordsArray(
+          copiedWordsArray,
+          wordRow,
+          wordRowLetter,
+          ""
+        );
 
-    // const newWordsArray = copiedWordsArray.map((e, { letter }) => {
-    // const { letter } = e;
-    // if (this.state.word.includes(e)) {
-    //   return true;
-    // }
-    //   console.log("e:");
-    //   return e[letter];
-    // });
-    // console.log("newWordsArray:", newWordsArray);
-    // for (let i = 0; i < copiedWord.length; i++) {}
+        this.setState({
+          wordsArray: updatedWordsArray,
+        });
+      }
+      //! If positioned at beginning of a wordRow
+      //! move up one Row and remove it's value
+      else if (wordRowLetter === 0 && wordRow !== 0) {
+        const updatedWordsArray = generateNewWordsArray(
+          copiedWordsArray,
+          [wordRow - 1],
+          [word.length - 1],
+          ""
+        );
+
+        this.setState({
+          wordRow: wordRow - 1,
+          wordRowLetter: word.length - 1,
+          wordsArray: updatedWordsArray,
+        });
+      }
+      //! Else stay in current Row and remove the last letter inputted
+      else {
+        const updatedWordsArray = generateNewWordsArray(
+          copiedWordsArray,
+          wordRow,
+          wordRowLetter - 1,
+          ""
+        );
+
+        this.setState({
+          wordRow: wordRow,
+          wordRowLetter: wordRowLetter - 1,
+          wordsArray: updatedWordsArray,
+        });
+      }
+    }
+    //! Else if Any Other Key pressed and the poisition is within the wordArray matrix
+    //! update the letter value
+    //! Also checks if the input is a letter and it is only on character
+    else if (
+      wordRow <= 5 &&
+      wordRowLetter < word.length &&
+      isAlpha(event.key) &&
+      event.key.length === 1
+    ) {
+      console.log("Hit 2!");
+      const updatedWordsArray = generateNewWordsArray(
+        copiedWordsArray,
+        wordRow,
+        wordRowLetter,
+        event.key.toUpperCase()
+      );
+
+      this.setState({
+        wordRow: wordRowLetter < word.length - 1 ? wordRow : wordRow + 1,
+        wordRowLetter: wordRowLetter < word.length - 1 ? wordRowLetter + 1 : 0,
+        wordsArray: updatedWordsArray,
+      });
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener("keydown", this.handleKeyPress);
+  }
+
+  handleOnSubmit = () => {
+    const copiedWordsArray = [...this.state.wordsArray];
+
+    const newWordsArray = copiedWordsArray.map((lettersArray) => {
+      return lettersArray.map((e, letterIndex) => {
+        if (
+          e.letter.toUpperCase() === this.state.word[letterIndex].toUpperCase()
+        ) {
+          return {
+            ...e,
+            noMatch: false,
+            matched: true,
+            included: false,
+          };
+        } else if (
+          this.state.word.toUpperCase().includes(e.letter.toUpperCase()) &&
+          e.letter !== ""
+        ) {
+          return {
+            ...e,
+            noMatch: false,
+            matched: false,
+            included: true,
+          };
+        }
+        return {
+          ...e,
+          noMatch: true,
+          matched: false,
+          included: false,
+        };
+      });
+    });
+    this.setState({
+      wordsArray: newWordsArray,
+    });
   };
 
   render() {
-    // const { guessInput } = this.state;
-
     return (
       <div className="App">
         <h1>Wordle</h1>
-        <div>
-          {this.state.wordsArray.map((lettersArray, wordIndex) => {
-            return (
-              <WordComponent
-                key={`Word-Index-${wordIndex}`}
-                wordIndex={wordIndex}
-                lettersArray={lettersArray}
-                handleLetterInputChange={this.handleLetterInputChange}
-              />
-            );
-          })}
-        </div>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={this.handleOnNextSubmit}
+        >
+          Next
+        </button>
+
         <button
           type="button"
           className="btn btn-primary"
@@ -119,9 +770,38 @@ export class App extends Component {
         >
           Submit
         </button>
+        <div>
+          {this.state.wordsArray.map((lettersArray, wordIndex) => {
+            return (
+              <WordComponent
+                key={`Word-Index-${wordIndex}`}
+                wordIndex={wordIndex}
+                lettersArray={lettersArray}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }
 }
 
 export default App;
+
+// handleLetterInputChange = (event, wordIndex, letterIndex) => {
+//   const copiedWordsArray = [...this.state.wordsArray];
+
+//   copiedWordsArray[wordIndex][letterIndex] = {
+//     ...copiedWordsArray[wordIndex][letterIndex],
+//     letter: event.target.value.toUpperCase(),
+//   };
+
+//   this.setState(
+//     {
+//       wordsArray: copiedWordsArray,
+//     },
+//     () => {
+//       console.log(this.state.wordsArray);
+//     }
+//   );
+// };
