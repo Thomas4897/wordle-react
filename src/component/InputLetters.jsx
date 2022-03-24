@@ -11,7 +11,6 @@ export function InputLetters(props) {
             color: props.matched ? "white" : props.included ? "white" : props.noMatch ? "white" : "" 
           }}
           readOnly={true}
-
         />
     )
 }

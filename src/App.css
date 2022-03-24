@@ -57,3 +57,14 @@ body {
   border-radius: 6px;
   background-color: #e7e8ed;
 }
+
+button {
+  margin: 5px;
+  background-color: rgb(56, 165, 56);
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  color: white;
+}

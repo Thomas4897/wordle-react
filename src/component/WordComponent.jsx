@@ -13,7 +13,6 @@ export function WordComponent(props) {
                 matched={matched}
                 included={included}
                 noMatch={noMatch}
-   
                 />
             }) }
         </div>

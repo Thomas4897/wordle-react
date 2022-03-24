@@ -2,206 +2,8 @@ import React, { Component } from "react";
 import { WordComponent } from "./component";
 import "./App.css";
 import isAlpha from "validator/lib/isAlpha";
-// const validator = require("validator");
 
-// const serverURL =
-//   "https://git.charlesreid1.com/cs/five-letter-words/raw/branch/master";
-
-const wordListArray = ["start", "catch", "build", "sight", "guide"];
-// let blankWordsArray = [
-//   [
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//   ],
-//   [
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//   ],
-//   [
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//   ],
-//   [
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//   ],
-//   [
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//   ],
-//   [
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//     {
-//       letter: "",
-//       matched: false,
-//       included: false,
-//       noMatch: false,
-//     },
-//   ],
-// ];
+const wordListArray = ["start", "catch", "build", "sight", "guide", "could"];
 
 function generateNewWordsArray(
   wordsArray,
@@ -222,6 +24,8 @@ export class App extends Component {
     word: "start",
     wordRow: 0,
     wordRowLetter: 0,
+    guessedWord: "",
+    continueInput: true,
     wordsArray: [
       [
         {
@@ -422,219 +226,218 @@ export class App extends Component {
     const randomNumber = Math.floor(Math.random() * wordListArray.length);
     const newWord = wordListArray[randomNumber];
 
-    this.setState(
-      {
-        word: newWord,
-        wordRow: 0,
-        wordRowLetter: 0,
-        wordsArray: [
-          [
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-          ],
-          [
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-          ],
-          [
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-          ],
-          [
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-          ],
-          [
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-          ],
-          [
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-            {
-              letter: "",
-              matched: false,
-              included: false,
-              noMatch: false,
-            },
-          ],
+    this.setState({
+      word: newWord,
+      wordRow: 0,
+      wordRowLetter: 0,
+      continueInput: true,
+      wordsArray: [
+        [
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
         ],
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+        [
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+        ],
+        [
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+        ],
+        [
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+        ],
+        [
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+        ],
+        [
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+          {
+            letter: "",
+            matched: false,
+            included: false,
+            noMatch: false,
+          },
+        ],
+      ],
+    });
   };
 
   handleKeyPress = (event) => {
-    let { word, wordRow, wordRowLetter } = this.state;
+    let { word, continueInput, wordRow, wordRowLetter } = this.state;
     const copiedWordsArray = [...this.state.wordsArray];
 
     //! If "Eneter" key press run handleOnSubmit;
-    if (event.key === "Enter") {
+    if (continueInput === false && event.key === "Enter") {
       this.handleOnSubmit();
+      this.setState({
+        continueInput: true,
+      });
     }
     //! if "Backspace" key pressed remove last inputted letter
     else if (event.key === "Backspace") {
@@ -650,6 +453,7 @@ export class App extends Component {
 
         this.setState({
           wordsArray: updatedWordsArray,
+          continueInput: true,
         });
       }
       //! If positioned at beginning of a wordRow
@@ -661,10 +465,10 @@ export class App extends Component {
           [word.length - 1],
           ""
         );
-
         this.setState({
           wordRow: wordRow - 1,
           wordRowLetter: word.length - 1,
+          continueInput: true,
           wordsArray: updatedWordsArray,
         });
       }
@@ -680,6 +484,7 @@ export class App extends Component {
         this.setState({
           wordRow: wordRow,
           wordRowLetter: wordRowLetter - 1,
+          continueInput: true,
           wordsArray: updatedWordsArray,
         });
       }
@@ -691,9 +496,9 @@ export class App extends Component {
       wordRow <= 5 &&
       wordRowLetter < word.length &&
       isAlpha(event.key) &&
-      event.key.length === 1
+      event.key.length === 1 &&
+      continueInput === true
     ) {
-      console.log("Hit 2!");
       const updatedWordsArray = generateNewWordsArray(
         copiedWordsArray,
         wordRow,
@@ -706,6 +511,11 @@ export class App extends Component {
         wordRowLetter: wordRowLetter < word.length - 1 ? wordRowLetter + 1 : 0,
         wordsArray: updatedWordsArray,
       });
+      if (wordRowLetter === 4) {
+        this.setState({
+          continueInput: false,
+        });
+      }
     }
   };
 
@@ -715,40 +525,48 @@ export class App extends Component {
 
   handleOnSubmit = () => {
     const copiedWordsArray = [...this.state.wordsArray];
+    const currentRow = this.state.wordRow - 1;
 
-    const newWordsArray = copiedWordsArray.map((lettersArray) => {
-      return lettersArray.map((e, letterIndex) => {
-        if (
-          e.letter.toUpperCase() === this.state.word[letterIndex].toUpperCase()
-        ) {
+    if (this.state.continueInput === false) {
+      const newLettersArray = copiedWordsArray[currentRow].map(
+        (e, letterIndex) => {
+          if (
+            e.letter.toUpperCase() ===
+            this.state.word[letterIndex].toUpperCase()
+          ) {
+            return {
+              ...e,
+              noMatch: false,
+              matched: true,
+              included: false,
+            };
+          } else if (
+            this.state.word.toUpperCase().includes(e.letter.toUpperCase()) &&
+            e.letter !== ""
+          ) {
+            return {
+              ...e,
+              noMatch: false,
+              matched: false,
+              included: true,
+            };
+          }
           return {
             ...e,
-            noMatch: false,
-            matched: true,
+            noMatch: true,
+            matched: false,
             included: false,
           };
-        } else if (
-          this.state.word.toUpperCase().includes(e.letter.toUpperCase()) &&
-          e.letter !== ""
-        ) {
-          return {
-            ...e,
-            noMatch: false,
-            matched: false,
-            included: true,
-          };
         }
-        return {
-          ...e,
-          noMatch: true,
-          matched: false,
-          included: false,
-        };
+      );
+
+      copiedWordsArray[currentRow] = newLettersArray;
+
+      this.setState({
+        continueInput: true,
+        wordsArray: copiedWordsArray,
       });
-    });
-    this.setState({
-      wordsArray: newWordsArray,
-    });
+    }
   };
 
   render() {
@@ -787,21 +605,3 @@ export class App extends Component {
 }
 
 export default App;
-
-// handleLetterInputChange = (event, wordIndex, letterIndex) => {
-//   const copiedWordsArray = [...this.state.wordsArray];
-
-//   copiedWordsArray[wordIndex][letterIndex] = {
-//     ...copiedWordsArray[wordIndex][letterIndex],
-//     letter: event.target.value.toUpperCase(),
-//   };
-
-//   this.setState(
-//     {
-//       wordsArray: copiedWordsArray,
-//     },
-//     () => {
-//       console.log(this.state.wordsArray);
-//     }
-//   );
-// };
